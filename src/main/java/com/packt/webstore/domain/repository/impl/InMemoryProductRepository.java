@@ -89,4 +89,44 @@ public class InMemoryProductRepository implements ProductRepository {
         productsByCategory.retainAll(productsByBrand);
         return productsByCategory;
     }
+
+    @Override
+    public List<Product> getProductByManufacturer(String manufacturer) {
+        List<Product> productsByManufacturer = new ArrayList<>();
+        for (Product product : listOfProducts) {
+            if (product.getManufacturer().equalsIgnoreCase(manufacturer)) {
+                productsByManufacturer.add(product);
+            }
+        }
+        return productsByManufacturer;
+    }
+
+    @Override
+    public Set<Product> getProductByPriceFilter(Map<String, List<String>> filterParams) {
+        Set<Product> productsGrThanLow = new HashSet<>();
+        Set<Product> productsLeThanHigh = new HashSet<>();
+        Set<String> criterias = filterParams.keySet();
+        if (criterias.contains("low")) {
+            for (String price : filterParams.get("low")) {
+                for (Product product : listOfProducts) {
+                    BigDecimal lowPrice = BigDecimal.valueOf(Long.parseLong(price));
+                    if (lowPrice.compareTo(product.getUnitPrice()) < 0) {
+                        productsGrThanLow.add(product);
+                    }
+                }
+            }
+        }
+        if (criterias.contains("high")) {
+            for (String price : filterParams.get("high")) {
+                for (Product product : productsGrThanLow) {
+                    BigDecimal highPrice = BigDecimal.valueOf(Long.parseLong(price));
+                    if (highPrice.compareTo(product.getUnitPrice()) > 0) {
+                        productsLeThanHigh.add(product);
+                    }
+                }
+            }
+        }
+        return productsLeThanHigh;
+    }
 }
+

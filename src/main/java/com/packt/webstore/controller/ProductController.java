@@ -1,5 +1,6 @@
 package com.packt.webstore.controller;
 
+import com.packt.webstore.domain.Product;
 import com.packt.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/products")
@@ -44,9 +46,20 @@ public class ProductController {
     }
 
     @RequestMapping("/product")
-    public String getProductById(@RequestParam("id") String porductId, Model model){
+    public String getProductById(@RequestParam("id") String porductId, Model model) {
         model.addAttribute("product", productService.getProductById(porductId));
         return "product";
+    }
+
+    @RequestMapping("/{tablet}/{price}")
+    public String filterProducts(@PathVariable("tablet") String category, @MatrixVariable Map<String, List<String>> price, @RequestParam("manufacturer") String manufacturer, Model model) {
+        List<Product> productsByCategory = productService.getProductsByCategory(category);
+        Set<Product> productByPriceFilter = productService.getProductByPriceFilter(price);
+        List<Product> productsByManufacturer = productService.getProductsByManufacturer(manufacturer);
+        productsByCategory.retainAll(productByPriceFilter);
+        productsByCategory.retainAll(productsByManufacturer);
+        model.addAttribute("products", productsByCategory);
+        return "products";
     }
 
 }
