@@ -74,13 +74,12 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewProductFrom(@ModelAttribute("newProduct") Product productToBeAdde, BindingResult result) {
+    public String processAddNewProductFrom(@ModelAttribute("newProduct") Product productToBeAdded, BindingResult result) {
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {
             throw new RuntimeException("Próba wiązania niedozwolonych pól: " + StringUtils.arrayToCommaDelimitedString(suppressedFields));
         }
-
-        productService.addProduct(productToBeAdde);
+        productService.addProduct(productToBeAdded);
         return "redirect:/products";
     }
 
