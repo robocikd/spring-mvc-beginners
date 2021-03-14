@@ -19,4 +19,6 @@ public interface ProductRepository {
 
     Set<Product> getProductByPriceFilter(Map<String, List<String>> filterParams);
 
+    void addProduct(Product product);
+
 }

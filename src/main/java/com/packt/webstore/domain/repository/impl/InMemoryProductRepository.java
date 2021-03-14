@@ -128,5 +128,10 @@ public class InMemoryProductRepository implements ProductRepository {
         }
         return productsLeThanHigh;
     }
+
+    @Override
+    public void addProduct(Product product) {
+        listOfProducts.add(product);
+    }
 }
 
