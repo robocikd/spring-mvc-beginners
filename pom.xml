@@ -8,7 +8,7 @@
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-webmvc</artifactId>
-  		<version>4.0.3.RELEASE</version>
+  		<version>5.2.12.RELEASE</version>
   	</dependency>
   	<dependency>
   		<groupId>javax.servlet</groupId>
@@ -18,9 +18,14 @@
   	<dependency>
   		<groupId>javax.servlet</groupId>
   		<artifactId>javax.servlet-api</artifactId>
-  		<version>3.1.0</version>
+  		<version>4.0.1</version>
   		<scope>provided</scope>
   	</dependency>
+	  <dependency>
+		  <groupId>org.springframework.security</groupId>
+		  <artifactId>spring-security-core</artifactId>
+		  <version>5.4.4</version>
+	  </dependency>
   </dependencies>
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
