@@ -2,6 +2,7 @@ package com.packt.webstore.domain.repository.impl;
 
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.repository.ProductRepository;
+import com.packt.webstore.exception.ProductNoFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -51,7 +52,7 @@ public class InMemoryProductRepository implements ProductRepository {
             }
         }
         if (productById == null) {
-            throw new IllegalArgumentException("Brak produktu o wskazanym id: " + productId);
+            throw new ProductNoFoundException(productId);
         }
         return productById;
     }

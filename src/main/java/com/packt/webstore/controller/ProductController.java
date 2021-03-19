@@ -2,6 +2,7 @@ package com.packt.webstore.controller;
 
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.exception.NoProductFoundUnderCategoryException;
+import com.packt.webstore.exception.ProductNoFoundException;
 import com.packt.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -105,5 +107,15 @@ public class ProductController {
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
         binder.setDisallowedFields("unitsInOrder", "discontinued");
+    }
+
+    @ExceptionHandler(ProductNoFoundException.class)
+    public ModelAndView handleError(HttpServletRequest request, ProductNoFoundException exception) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("invalidProductId", exception.getProductId());
+        mav.addObject("exception", exception);
+        mav.addObject("url", request.getRequestURL() + "?" + request.getQueryString());
+        mav.setViewName("productNotFound");
+        return mav;
     }
 }
