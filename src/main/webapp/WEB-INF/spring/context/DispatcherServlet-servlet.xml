@@ -24,14 +24,19 @@
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
+
+    <bean id="unitsInStockValidator" class="com.packt.webstore.validator.UnitsInStockValidator"/>
+    <bean id="productImage" class="com.packt.webstore.validator.ProductImageValidator">
+        <property name="allowedSize" value="400000"/>
+    </bean>
     <bean id="productValidator" class="com.packt.webstore.validator.ProductValidator">
         <property name="springValidators">
-                  <set>
-                      <ref bean="unitsInStockValidator"/>
-                  </set>
+            <set>
+                <ref bean="unitsInStockValidator"/>
+                <ref bean="productImageValidator"/>
+            </set>
         </property>
     </bean>
-    <bean id="unitsInStockValidator" class="com.packt.webstore.validator.UnitsInStockValidator"/>
 
     <mvc:interceptors>
         <bean class="com.packt.webstore.interceptor.PerformanceMonitorInterceptor"/>
