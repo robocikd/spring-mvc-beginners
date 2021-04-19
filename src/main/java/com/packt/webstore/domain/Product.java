@@ -4,10 +4,12 @@ import com.packt.webstore.validator.ProductId;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
+    public static final long serialVersionUID = 7069484315229682432L;
 
     @Pattern(regexp = "P[0-9]+", message = "{Pattern.Product.productId.validation}")
     @ProductId

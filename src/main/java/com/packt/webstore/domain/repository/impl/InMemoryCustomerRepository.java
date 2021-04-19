@@ -14,9 +14,9 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
     public InMemoryCustomerRepository() {
 
-        Customer cus1 = new Customer(1, "Adam", "20-000 Lublin, ul. Poważna 12/1");
-        Customer cus2 = new Customer(1, "Damian", "22-000 Lublin, ul. Głęboka 12/33");
-        Customer cus3 = new Customer(1, "Zenek", "14-000 Lublin, ul. Miła 1/1");
+        Customer cus1 = new Customer("1", "Damian");
+        Customer cus2 = new Customer("2", "Zenon");
+        Customer cus3 = new Customer("3", "Gienek");
 
         customers.add(cus1);
         customers.add(cus2);
