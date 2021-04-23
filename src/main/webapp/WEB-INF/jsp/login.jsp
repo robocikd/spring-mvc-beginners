@@ -31,13 +31,13 @@
                             <spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
                         </div>
                     </c:if>
-                    <form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
+                    <form action="<c:url value="/appLogin"></c:url>" method="post">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Nazwa użytkownika" name='j_username' type="text">
+                                <input class="form-control" placeholder="Nazwa użytkownika" name='username' type="text">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Hasło" name='j_password'  type="password" value="">
+                                <input class="form-control" placeholder="Hasło" name='password'  type="password" value="">
                             </div>
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Zaloguj się">
                         </fieldset>

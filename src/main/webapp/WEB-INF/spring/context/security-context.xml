@@ -6,17 +6,23 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <security:http auto-config="true">
-        <security:intercept-url pattern="/products/add" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/products/add" access="hasRole('ADMIN')"/>
         <security:form-login login-page="/login"
+                             login-processing-url="/appLogin"
+                             username-parameter="username"
+                             password-parameter="password"
+
                              default-target-url="/products/add"
-                             authentication-failure-url="/loginfailed"/>
-        <security:logout logout-success-url="/logout"/>
+                             authentication-failure-url="/login"/>
+        <security:logout logout-url="/logout"
+                         logout-success-url="/products"/>
+        <security:csrf disabled="true" />
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
-                <security:user name="Admin" password="Admin123" authorities="ROLE_ADMIN"/>
+                <security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>

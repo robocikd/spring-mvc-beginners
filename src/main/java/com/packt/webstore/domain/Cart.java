@@ -47,7 +47,7 @@ public class Cart implements Serializable {
         if (cartItems.containsKey(productId)) {
             CartItem existingCartItem = cartItems.get(productId);
             existingCartItem.setQuantity(existingCartItem.getQuantity() + item.getQuantity());
-            cartItems.put(productId, item);
+            cartItems.put(productId, existingCartItem);
         } else {
             cartItems.put(productId, item);
         }
